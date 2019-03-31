@@ -34,6 +34,8 @@ public class UserManagerController {
                 return ServerResponse.createByErrorMessage("不是管理员，没有权限登陆");
             }
         }
+
+        return null;
     }
 
 }
