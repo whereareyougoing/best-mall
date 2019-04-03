@@ -80,6 +80,7 @@
         <property name="basePackage" value="com.imooc.mall.repository"/>
     </bean>
 
+
     <!-- 使用@Transactional进行声明式事务管理需要声明下面这行 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
     <!-- 事务管理 -->

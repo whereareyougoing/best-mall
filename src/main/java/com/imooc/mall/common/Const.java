@@ -10,6 +10,9 @@ import java.util.Set;
  */
 public class Const {
 
+    public static final String PROPERTIES_NAME = "mmall.properties";
+
+
     public static final String CURRENT_USER = "current_user";
     public static final String USERNAME = "username";
     public static final String EMAIL = "email";
