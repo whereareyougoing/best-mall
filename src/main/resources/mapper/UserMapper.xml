@@ -154,9 +154,17 @@
   </update>
 
   <select id="checkUsername" resultType="java.lang.Integer" parameterType="string">
-
+      select count(1)
+      from mmall_user
+      where username = #{username}
   </select>
 
+  <select id="selectLogin" resultType="com.imooc.mall.domain.User">
+      select <include refid="Base_Column_List"/>
+      from mmall_user
+      where username = #{username}
+      and password = #{password}
+  </select>
 
 
 </mapper>
