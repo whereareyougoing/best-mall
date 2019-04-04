@@ -3,6 +3,8 @@ package com.imooc.mall;
 import com.imooc.mall.domain.Order;
 import com.imooc.mall.domain.test.OrderDemo;
 import com.imooc.mall.repository.OrderMapper;
+import com.imooc.mall.util.MD5Util;
+import com.imooc.mall.util.PropertiesUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -46,6 +48,19 @@ public class test {
             logger.error("message:{},e:{}", "123123123", e);
             System.out.println("123123123===============123123");
         }
+    }
+
+    @Test
+    public void testMD5(){
+        String password = "123456";
+        String md5Password = MD5Util.MD5EncodingUtf8(password);
+        System.out.println(md5Password);
+    }
+
+    @Test
+    public void testPropertiesUtil(){
+        String value = PropertiesUtil.getProperty("password.salt");
+        System.out.println(value);
     }
 
 }
