@@ -5,13 +5,10 @@ import com.imooc.mall.domain.Order;
 import com.imooc.mall.domain.User;
 import com.imooc.mall.domain.test.OrderDemo;
 import com.imooc.mall.repository.OrderMapper;
-<<<<<<< HEAD
 import com.imooc.mall.util.MD5Util;
-import com.imooc.mall.util.PropertiesUtil;
-=======
 import com.imooc.mall.repository.UserMapper;
+import com.imooc.mall.util.PropertiesUtil;
 import org.junit.Assert;
->>>>>>> dev
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -58,7 +55,7 @@ public class test {
         }
     }
 
-<<<<<<< HEAD
+
     @Test
     public void testMD5(){
         String password = "123456";
@@ -70,14 +67,28 @@ public class test {
     public void testPropertiesUtil(){
         String value = PropertiesUtil.getProperty("password.salt");
         System.out.println(value);
-=======
+    }
 
     @Test
     public void testQueryUserById(){
         User user = userMapper.selectByPrimaryKey(1);
         Assert.assertNotNull("未找到用户",user);
         System.out.println(JSON.toJSON(user));
->>>>>>> dev
+
+        String s = "427338237BD929443EC5D48E24FD2B1A";
+    }
+
+    @Test
+    public void testInsertUser(){
+        User user = userMapper.selectByPrimaryKey(1);
+        User user1 = new User();
+        BeanUtils.copyProperties(user,user1);
+        user1.setId(22);
+        user1.setUsername("123");
+        user1.setPassword(MD5Util.MD5EncodingUtf8("123456"));
+        int result = userMapper.insert(user1);
+        Assert.assertNotEquals(0, result);
+        System.out.println(result);
     }
 
 }
