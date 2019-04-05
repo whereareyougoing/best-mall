@@ -25,17 +25,19 @@ public class UserServiceImpl implements IUserService{
     @Override
     public ServerResponse<User> login(String username, String password) {
 
-        int resultCount = userMapper.checkUsername(username);
-        if (resultCount == 0){
-            return ServerResponse.createByErrorMessage("用户不存在");
-        }
+//        int resultCount = userMapper.checkUsername(username);
+//        if (resultCount == 0){
+//            return ServerResponse.createByErrorMessage("用户不存在");
+//        }
+//
+//        String md5Password = MD5Util.MD5EncodingUtf8(password);
+//        User user = userMapper.selectLogin(username, md5Password);
+//        if (user == null){
+//            return ServerResponse.createByErrorMessage("密码错误");
+//        }
+//        user.setPassword(StringUtils.EMPTY);
+//        return ServerResponse.createBySuccess("登陆成功",user);
 
-        String md5Password = MD5Util.MD5EncodingUtf8(password);
-        User user = userMapper.selectLogin(username, md5Password);
-        if (user == null){
-            return ServerResponse.createByErrorMessage("密码错误");
-        }
-        user.setPassword(StringUtils.EMPTY);
-        return ServerResponse.createBySuccess("登陆成功",user);
+        return null;
     }
 }

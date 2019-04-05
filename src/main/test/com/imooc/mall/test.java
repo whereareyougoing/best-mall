@@ -1,10 +1,17 @@
 package com.imooc.mall;
 
+import com.alibaba.fastjson.JSON;
 import com.imooc.mall.domain.Order;
+import com.imooc.mall.domain.User;
 import com.imooc.mall.domain.test.OrderDemo;
 import com.imooc.mall.repository.OrderMapper;
+<<<<<<< HEAD
 import com.imooc.mall.util.MD5Util;
 import com.imooc.mall.util.PropertiesUtil;
+=======
+import com.imooc.mall.repository.UserMapper;
+import org.junit.Assert;
+>>>>>>> dev
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -13,7 +20,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.Assert;
 
 /**
  * @author 宋艾衡
@@ -29,6 +35,8 @@ public class test {
 
     @Autowired
     private OrderMapper orderMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Test
     public void testCopy(){
@@ -43,13 +51,14 @@ public class test {
     public void testException(){
         try {
             // throw new Exception("异常测试");
-            Assert.notNull(null,"不能为null");
+            Assert.assertNotNull(null);
         }catch (Exception e){
             logger.error("message:{},e:{}", "123123123", e);
             System.out.println("123123123===============123123");
         }
     }
 
+<<<<<<< HEAD
     @Test
     public void testMD5(){
         String password = "123456";
@@ -61,6 +70,14 @@ public class test {
     public void testPropertiesUtil(){
         String value = PropertiesUtil.getProperty("password.salt");
         System.out.println(value);
+=======
+
+    @Test
+    public void testQueryUserById(){
+        User user = userMapper.selectByPrimaryKey(1);
+        Assert.assertNotNull("未找到用户",user);
+        System.out.println(JSON.toJSON(user));
+>>>>>>> dev
     }
 
 }
