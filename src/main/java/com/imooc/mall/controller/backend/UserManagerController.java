@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 
 @Controller
-@RequestMapping("/manager/user")
+@RequestMapping("/manager/user/")
 public class UserManagerController {
 
     @Autowired

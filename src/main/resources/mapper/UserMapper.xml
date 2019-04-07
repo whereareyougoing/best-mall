@@ -36,7 +36,7 @@
       update_time)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
-      #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, now(),now()
+      #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, now(),now())
   </insert>
   <insert id="insertSelective" parameterType="com.imooc.mall.domain.User" >
     insert into mmall_user
@@ -105,6 +105,20 @@
       </if>
     </trim>
   </insert>
+
+
+  <insert id="insertGenerator" useGeneratedKeys="true" keyProperty="id" parameterType="com.imooc.mall.domain.User">
+    insert into mmall_user
+      (username, password,
+      email, phone, question,
+      answer, role, create_time,
+      update_time)
+    values
+      (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR},
+      #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, now(),now())
+  </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.imooc.mall.domain.User" >
     update mmall_user
     <set >
@@ -152,6 +166,16 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <update id="updatePasswordByUsername">
+    update
+      mmall_user
+    set
+      password = #{password},
+      updatetime = now()
+    where
+      username = #{username}
+  </update>
+
   <select id="checkUsername" resultType="java.lang.Integer" parameterType="string">
       select count(1)
       from mmall_user
@@ -162,6 +186,40 @@
       select <include refid="Base_Column_List"/>
       from mmall_user
       where username = #{username}
+      and password = #{password}
+  </select>
+  <select id="checkEmail" resultType="java.lang.Integer">
+    select
+      count(1)
+    from
+      mmall_user
+    where email = #{email}
+  </select>
+  <select id="selectQuestionByUsername" resultType="java.lang.String">
+    select
+      question
+    from
+      mmall_user
+    where
+      username = #{username}
+  </select>
+  <select id="checkAnswer" resultType="java.lang.Integer" parameterType="map">
+    select
+      count(1)
+    from
+      mmall_user
+    where
+      username = #{username}
+      and question = #{question}
+      and answer = #{answer}
+  </select>
+  <select id="checkPassword" resultType="java.lang.Integer" parameterType="map">
+    select
+      count(1)
+    from
+      mmall_user
+    where
+      id = #{id}
       and password = #{password}
   </select>
 
