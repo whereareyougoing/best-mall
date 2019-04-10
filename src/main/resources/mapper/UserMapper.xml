@@ -15,6 +15,55 @@
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
+
+  <resultMap id="BaseUserMap" type="com.imooc.mall.domain.User">
+      <result property="id" column="id"/>
+      <result property="username" column="username"/>
+      <result property="password" column="password"/>
+      <result property="email" column="email"/>
+      <result property="phone" column="phone"/>
+      <result property="question" column="question"/>
+      <result property="answer" column="answer"/>
+      <result property="role" column="role"/>
+      <result property="createTime" column="create_time"/>
+      <result property="updateTime" column="update_time"/>
+  </resultMap>
+
+  <!-- 一对一关联 -->
+  <resultMap id="UserMap" type="com.imooc.mall.domain.User">
+    <id property="id" column="id"/>
+    <result property="username" column="username"/>
+    <result property="password" column="password"/>
+    <result property="email" column="email"/>
+    <result property="phone" column="phone"/>
+    <result property="question" column="question"/>
+    <result property="answer" column="answer"/>
+    <result property="role" column="role"/>
+    <result property="createTime" column="create_time"/>
+    <result property="updateTime" column="update_time"/>
+    <association property="order" javaType="com.imooc.mall.domain.Order">
+
+    </association>
+  </resultMap>
+
+  <!-- 一对多关联 -->
+  <resultMap id="ListUserMap" type="com.imooc.mall.domain.User">
+    <id property="id" column="id"/>
+    <result property="username" column="username"/>
+    <result property="password" column="password"/>
+    <result property="email" column="email"/>
+    <result property="phone" column="phone"/>
+    <result property="question" column="question"/>
+    <result property="answer" column="answer"/>
+    <result property="role" column="role"/>
+    <result property="createTime" column="create_time"/>
+    <result property="updateTime" column="update_time"/>
+    <collection property="orders" javaType="list" ofType="com.imooc.mall.domain.Order">
+
+    </collection>
+  </resultMap>
+
+
   <sql id="Base_Column_List" >
     id, username, password, email, phone, question, answer, role, create_time, update_time
   </sql>
@@ -182,7 +231,7 @@
       where username = #{username}
   </select>
 
-  <select id="selectLogin" resultType="com.imooc.mall.domain.User">
+  <select id="selectLogin" resultMap="BaseUserMap">
       select <include refid="Base_Column_List"/>
       from mmall_user
       where username = #{username}

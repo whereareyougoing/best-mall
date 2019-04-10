@@ -1,8 +1,11 @@
 package com.imooc.mall.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = -9139687311320986393L;
     private Integer id;
 
     private String username;

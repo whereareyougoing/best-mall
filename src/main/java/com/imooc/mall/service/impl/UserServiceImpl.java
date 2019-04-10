@@ -115,9 +115,13 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public ServerResponse<String> forgetResetPassword(String username, String newPassword, String forgetToken) {
-        if (StringUtils.isBlank(forgetToken)) return ServerResponse.createByErrorMessage("修改密码需要token验证");
+        if (StringUtils.isBlank(forgetToken)) {
+            return ServerResponse.createByErrorMessage("修改密码需要token验证");
+        }
         ServerResponse validResponse = this.checkValid(username, Const.USERNAME);
-        if (!validResponse.isSuccess()) return ServerResponse.createByErrorMessage("用户不存在");
+        if (!validResponse.isSuccess()) {
+            return ServerResponse.createByErrorMessage("用户不存在");
+        }
         String cacheToken = TokenCache.getKey(TokenCache.TOKEN_PREFIX + username);
         if (StringUtils.equals(forgetToken, cacheToken)) {
             String md5Password = MD5Util.MD5EncodingUtf8(newPassword);
@@ -125,43 +129,59 @@ public class UserServiceImpl implements IUserService{
             if (result > 0) {
                 return ServerResponse.createBySuccess("修改密码成功");
             }
-        }else return ServerResponse.createByErrorMessage("token错误，或者过期");
+        }else {
+            return ServerResponse.createByErrorMessage("token错误，或者过期");
+        }
         return ServerResponse.createByErrorMessage("修改密码失败");
     }
 
     @Override
     public ServerResponse<String> resetPassword(String oldPassword, String newPassword,User user) {
         int result = userMapper.checkPassword(MD5Util.MD5EncodingUtf8(oldPassword), user.getId());
-        if (result == 0) return ServerResponse.createByErrorMessage("就密码错误");
+        if (result == 0) {
+            return ServerResponse.createByErrorMessage("就密码错误");
+        }
         user.setPassword(MD5Util.MD5EncodingUtf8(newPassword));
         int updateResult = userMapper.updateByPrimaryKeySelective(user);
-        if (updateResult > 0) return ServerResponse.createBySuccessMessage("密码更新成功");
+        if (updateResult > 0) {
+            return ServerResponse.createBySuccessMessage("密码更新成功");
+        }
         return ServerResponse.createByErrorMessage("密码更新失败");
     }
 
     @Override
     public ServerResponse<User> updateInformation(User user) {
         ServerResponse response = this.checkValid(user.getEmail(), Const.EMAIL);
-        if (!response.isSuccess()) return response;
+        if (!response.isSuccess()) {
+            return response;
+        }
+
         User userUpdate = new User();
         BeanUtils.copyProperties(user, userUpdate);
         int result = userMapper.updateByPrimaryKeySelective(userUpdate);
-        if (result > 0) return ServerResponse.createBySuccessMessage("用户信息更新成功");
+        if (result > 0) {
+            return ServerResponse.createBySuccessMessage("用户信息更新成功");
+        }
         return ServerResponse.createByErrorMessage("用户信息更新失败");
     }
 
     @Override
     public ServerResponse<User> getInformation(Integer id) {
         User user = userMapper.selectByPrimaryKey(id);
-        if (user == null) return ServerResponse.createByErrorMessage("找不到该用户");
+        if (user == null) {
+            return ServerResponse.createByErrorMessage("找不到该用户");
+        }
         user.setPassword(StringUtils.EMPTY);
         return ServerResponse.createBySuccess(user);
     }
 
 
     // backend
+    @Override
     public ServerResponse checkAdminRole(User user){
-        if (user != null && user.getRole().intValue() == Const.Role.ROLE_ADMIN) return ServerResponse.createBySuccess();
+        if (user != null && user.getRole().intValue() == Const.Role.ROLE_ADMIN) {
+            return ServerResponse.createBySuccess();
+        }
         return ServerResponse.createByError();
     }
 }
