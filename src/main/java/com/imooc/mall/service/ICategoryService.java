@@ -1,6 +1,9 @@
 package com.imooc.mall.service;
 
 import com.imooc.mall.common.ServerResponse;
+import com.imooc.mall.domain.Category;
+
+import java.util.List;
 
 /**
  * @author 宋艾衡
@@ -12,8 +15,8 @@ public interface ICategoryService {
 
     ServerResponse updateCategoryName(Integer categoryId, String categoryName);
 
-    ServerResponse getChildrenParallelCategory(Integer categoryId);
+    ServerResponse<List<Category>> getChildrenParallelCategory(Integer categoryId);
 
-    ServerResponse selectCategoryAndChildrenById(Integer categoryId);
+    ServerResponse<List<Integer>> selectCategoryAndChildrenById(Integer categoryId);
 
 }

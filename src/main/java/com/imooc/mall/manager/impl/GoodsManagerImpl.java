@@ -13,7 +13,12 @@ import org.springframework.stereotype.Service;
 public class GoodsManagerImpl extends BaseManager implements IGoodsManager {
 
 
+
+
+
     public void add(){
+
+
 
     }
 
