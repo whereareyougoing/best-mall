@@ -56,4 +56,7 @@ public class Const {
     }
 
 
+    public static final String IMAGE_HOST_PREFIX =  "ftp.server.http.prefix";
+
+
 }

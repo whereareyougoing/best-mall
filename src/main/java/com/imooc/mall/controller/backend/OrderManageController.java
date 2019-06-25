@@ -33,15 +33,15 @@ public class OrderManageController {
 
     @RequestMapping("list.do")
     @ResponseBody
-    public ServerResponse<PageInfo> orderList(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+    public ServerResponse<PageInfo> orderList(HttpSession session, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorMessage("用户未登陆");
         }
 
         if (iUserService.checkAdminRole(user).isSuccess()) {
-            return iOrderService.manageList(pageNum,pageSize);
-        }else {
+            return iOrderService.manageList(pageNum, pageSize);
+        } else {
             return ServerResponse.createByErrorMessage("不是管理员，没有操作权限");
         }
     }
@@ -49,7 +49,7 @@ public class OrderManageController {
 
     @RequestMapping("detail.do")
     @ResponseBody
-    public ServerResponse<OrderVo> orderDetail(HttpSession session,Long orderNo){
+    public ServerResponse<OrderVo> orderDetail(HttpSession session, Long orderNo) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorMessage("未登陆");
@@ -57,7 +57,7 @@ public class OrderManageController {
 
         if (iUserService.checkAdminRole(user).isSuccess()) {
             return iOrderService.manageDetail(orderNo);
-        }else {
+        } else {
             return ServerResponse.createByErrorMessage("不是管理员，没有操作权限");
         }
     }
@@ -71,27 +71,24 @@ public class OrderManageController {
         }
 
         if (iUserService.checkAdminRole(user).isSuccess()) {
-            return iOrderService.manageSearch(orderNo,pageNum,pageSize);
-        }else {
+            return iOrderService.manageSearch(orderNo, pageNum, pageSize);
+        } else {
             return ServerResponse.createByErrorMessage("不是管理员，没有操作权限");
         }
     }
 
     @RequestMapping("send_goods.do")
     @ResponseBody
-    public ServerResponse<String> orderSendGoods(HttpSession session,Long orderNo) {
+    public ServerResponse<String> orderSendGoods(HttpSession session, Long orderNo) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorMessage("未登陆");
         }
         if (iUserService.checkAdminRole(user).isSuccess()) {
             return iOrderService.manageSendGoods(orderNo);
-        }else {
+        } else {
             return ServerResponse.createByErrorMessage("不是管理员，没有操作权限");
         }
     }
-
-
-
 
 }
