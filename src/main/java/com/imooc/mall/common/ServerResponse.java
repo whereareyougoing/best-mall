@@ -11,6 +11,11 @@ import java.io.Serializable;
  */
 public class ServerResponse<T> implements Serializable {
 
+
+    // 可以用这样的一个类，代替code，message，和 status
+    private Result result;
+
+
     private int status;
     private String message;
     private T data;

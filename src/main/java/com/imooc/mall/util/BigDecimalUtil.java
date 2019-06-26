@@ -7,9 +7,9 @@ import java.math.RoundingMode;
  * @author 宋艾衡
  * @date 2019-05-26 02:21
  */
-public class BigdecimalUtil {
+public class BigDecimalUtil {
 
-    public BigdecimalUtil() {
+    public BigDecimalUtil() {
     }
 
     public static BigDecimal add(double v1,double v2){

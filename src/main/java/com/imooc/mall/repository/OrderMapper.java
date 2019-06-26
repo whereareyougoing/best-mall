@@ -1,7 +1,10 @@
 package com.imooc.mall.repository;
 
 import com.imooc.mall.domain.Order;
+import com.imooc.mall.domain.OrderItem;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface OrderMapper {
@@ -17,4 +20,7 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
+    int batchInsert(List<OrderItem> orderItemList);
+
+    Order selectByUserIdAndOrderNo(Integer userId, Long orderNo);
 }

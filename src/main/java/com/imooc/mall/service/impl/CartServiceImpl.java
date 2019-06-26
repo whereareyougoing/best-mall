@@ -10,7 +10,7 @@ import com.imooc.mall.domain.Product;
 import com.imooc.mall.repository.CartMapper;
 import com.imooc.mall.repository.ProductMapper;
 import com.imooc.mall.service.ICartService;
-import com.imooc.mall.util.BigdecimalUtil;
+import com.imooc.mall.util.BigDecimalUtil;
 import com.imooc.mall.util.PropertiesUtil;
 import com.imooc.mall.vo.CartProductVo;
 import com.imooc.mall.vo.CartVo;
@@ -84,7 +84,7 @@ public class CartServiceImpl implements ICartService {
                     }
                     cartProductVo.setQuantity(buyLimitCount);
 
-                    cartProductVo.setProductTotalPrice(BigdecimalUtil.add(cartTotalPrece.doubleValue(),
+                    cartProductVo.setProductTotalPrice(BigDecimalUtil.add(cartTotalPrece.doubleValue(),
                             cartProductVo.getProductTotalPrice().doubleValue()));
 
                     cartProductVo.setProductChecked(cartItem.getChecked());
@@ -93,7 +93,7 @@ public class CartServiceImpl implements ICartService {
 
                 if (cartItem.getChecked() == Const.Cart.CHECKED) {
                     // 如果已经勾选了，增加到总价中
-                    cartTotalPrece = BigdecimalUtil.add(cartTotalPrece.doubleValue(), cartProductVo.getProductTotalPrice().doubleValue());
+                    cartTotalPrece = BigDecimalUtil.add(cartTotalPrece.doubleValue(), cartProductVo.getProductTotalPrice().doubleValue());
                 }
                 cartProductVoList.add(cartProductVo);
             }
