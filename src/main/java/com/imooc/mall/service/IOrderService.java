@@ -51,4 +51,16 @@ public interface IOrderService {
      * @return
      */
     ServerResponse<PageInfo> getOrderList(Integer id, int pageNum, int pageSize);
+
+
+    // 后台操作
+
+
+    ServerResponse<PageInfo> manageList(int pageNum, int pageSize);
+
+    ServerResponse<OrderVo> manageDetail(Long orderNo);
+
+    ServerResponse<PageInfo> manageSearch(Long orderNo, int pageNum, int pageSize);
+
+    ServerResponse<String> manageSendGoods(Long orderNo);
 }

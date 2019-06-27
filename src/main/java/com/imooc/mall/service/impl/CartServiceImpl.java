@@ -157,13 +157,22 @@ public class CartServiceImpl implements ICartService {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(), ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
 
-        cartMapper.delectByUserIdProductIds(userId,productList);
+        cartMapper.deleteByUserIdProductIds(userId,productList);
         return this.list(userId);
     }
 
     @Override
     public ServerResponse<CartVo> selectOrUnSelect(Integer userId, Integer productId, int checked) {
-        cartMapper.checkOrUncheckedProduct(userId,productId,checked);
+        cartMapper.checkedOrUncheckedProduct(userId,productId,checked);
         return this.list(userId);
+    }
+
+
+    private boolean getAllCheckedStatus(Integer userId){
+        if(userId == null){
+            return false;
+        }
+        return cartMapper.selectCartProductCheckedStatusByUserId(userId) == 0;
+
     }
 }

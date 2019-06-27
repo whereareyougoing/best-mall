@@ -20,7 +20,11 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
-    int batchInsert(List<OrderItem> orderItemList);
-
     Order selectByUserIdAndOrderNo(Integer userId, Long orderNo);
+
+    List<Order> selectByUserId(Integer userId);
+
+    List<Order> selectAllOrder();
+
+    Order selectByOrderNo(Long orderNo);
 }

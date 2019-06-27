@@ -29,20 +29,20 @@
     from mmall_order
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from mmall_order
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.imooc.mall.domain.Order" >
-    insert into mmall_order (id, order_no, user_id, 
-      shipping_id, payment, payment_type, 
-      postage, status, payment_time, 
-      send_time, end_time, close_time, 
+    insert into mmall_order (id, order_no, user_id,
+      shipping_id, payment, payment_type,
+      postage, status, payment_time,
+      send_time, end_time, close_time,
       create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, 
-      #{shippingId,jdbcType=INTEGER}, #{payment,jdbcType=DECIMAL}, #{paymentType,jdbcType=INTEGER}, 
-      #{postage,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP}, 
-      #{sendTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER},
+      #{shippingId,jdbcType=INTEGER}, #{payment,jdbcType=DECIMAL}, #{paymentType,jdbcType=INTEGER},
+      #{postage,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP},
+      #{sendTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP},
       now(), #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.imooc.mall.domain.Order" >
@@ -198,4 +198,28 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByUserIdAndOrderNo" resultType="com.imooc.mall.domain.Order" parameterType="map">
+      select <include refid="Base_Column_List"/>
+      from mmall_order
+      where user_id = #{userId}
+      and order_no = #{orderNo}
+  </select>
+  <select id="selectByUserId" resultType="com.imooc.mall.domain.Order" parameterType="map">
+      select <include refid="Base_Column_List"/>
+      from mmall_order
+      where user_id = #{userId}
+  </select>
+  <select id="selectAllOrder" resultType="com.imooc.mall.domain.Order" parameterType="map">
+    select <include refid="Base_Column_List"/>
+    from mmall_order
+    order by create_time desc
+  </select>
+  <select id="selectByOrderNo" resultType="com.imooc.mall.domain.Order">
+    select <include refid="Base_Column_List"/>
+    from mmall_order
+    where order_no = #{orderNo}
+  </select>
+
+
 </mapper>
