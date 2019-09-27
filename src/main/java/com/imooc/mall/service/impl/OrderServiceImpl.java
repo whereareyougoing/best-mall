@@ -406,6 +406,7 @@ public class OrderServiceImpl implements IOrderService {
 
 
     // alipay
+    @Override
     public ServerResponse pay(Long orderNo,Integer userId,String path){
 
         Map<String ,String> resultMap = Maps.newHashMap();
@@ -539,6 +540,7 @@ public class OrderServiceImpl implements IOrderService {
         }
     }
 
+    @Override
     public ServerResponse aliCallback(Map<String,String> params){
         Long orderNo = Long.parseLong(params.get("out_trade_no"));
         String tradeNo = params.get("trade_no");
@@ -593,5 +595,10 @@ public class OrderServiceImpl implements IOrderService {
             orderMapper.closeOrderByOrderId(order.getId());
             log.info("关闭订单OrderNo：{}",order.getOrderNo());
         }
+    }
+
+    @Override
+    public ServerResponse queryOrderPayStatus(Integer id, Long orderNo) {
+        return null;
     }
 }

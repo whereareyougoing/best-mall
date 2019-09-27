@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.imooc.mall.common.ServerResponse;
 import com.imooc.mall.vo.OrderVo;
 
+import java.util.Map;
+
 /**
  * @author 宋艾衡
  * @date 2019/4/17 10:15
@@ -69,4 +71,10 @@ public interface IOrderService {
      * @param hour
      */
     void closeOrder(int hour);
+
+    ServerResponse pay(Long orderNo, Integer id, String path);
+
+    ServerResponse aliCallback(Map<String, String> params);
+
+    ServerResponse queryOrderPayStatus(Integer id, Long orderNo);
 }
