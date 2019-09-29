@@ -2,6 +2,7 @@ package com.imooc.mall.repository;
 
 import com.imooc.mall.domain.Order;
 import com.imooc.mall.domain.OrderItem;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,4 +28,9 @@ public interface OrderMapper {
     List<Order> selectAllOrder();
 
     Order selectByOrderNo(Long orderNo);
+
+    // 二期新增定时关单
+    List<Order> selectOrderStatusByCreateTime(@Param("status") Integer status, @Param("date") String date);
+
+    int closeOrderByOrderId(Integer id);
 }

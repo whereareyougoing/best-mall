@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.imooc.mall.common.ServerResponse;
 import com.imooc.mall.vo.OrderVo;
 
+import java.util.Map;
+
 /**
  * @author 宋艾衡
  * @date 2019/4/17 10:15
@@ -63,4 +65,16 @@ public interface IOrderService {
     ServerResponse<PageInfo> manageSearch(Long orderNo, int pageNum, int pageSize);
 
     ServerResponse<String> manageSendGoods(Long orderNo);
+
+    /**
+     * 1 小时  未付款订单进行关闭
+     * @param hour
+     */
+    void closeOrder(int hour);
+
+    ServerResponse pay(Long orderNo, Integer id, String path);
+
+    ServerResponse aliCallback(Map<String, String> params);
+
+    ServerResponse queryOrderPayStatus(Integer id, Long orderNo);
 }
